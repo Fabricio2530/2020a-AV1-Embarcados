@@ -42,7 +42,7 @@ Vocês devem gravar um vídeo do firmware funcionando na placa para submeter o p
 
 > Vídeo de como tem que ficar
 
-[![](doc/videoc-320.png)](https://drive.google.com/file/d/1lzZZOpDEZalL9JFab_iOdeJT6w7dCdSl/view?usp=sharing)
+[![](doc/videoc-320.png)](https://youtu.be/fVtPPhURKI0)
 
 Projeto funciona conforme descrição. Possui um pequeno bug (usando o protótipo possui algum erro), mas projeto funciona de forma geral. 
 
@@ -77,7 +77,7 @@ Usuário consegue ajustar valores do cronometro (**segundos**) e iniciar contage
 
 > Vídeo de como tem que ficar:
 
-[![](doc/videoc-320.png)](https://drive.google.com/file/d/1r7iBGePFewMT4TD52mmHC_wjVtUkSxOF/view?usp=sharing)
+[![](doc/videoc-320.png)](https://youtu.be/LQ2AuSnMiHQ)
 
 - Indica no LCD que cronometro está ativado
 - Aumento 'inteligente' do valor de minuto e segundo do cronometro
@@ -90,7 +90,6 @@ Usuário consegue ajustar valores do cronometro (**segundos**) e iniciar contage
 
 :triangular_flag_on_post:  **Ao finalizar a entrega preencher o formulário (uma única vez!): https://forms.gle/uTa7SYNAPd2qbC8X7**
 
-
 ### D
 
 Um item:
@@ -100,4 +99,3 @@ Um item:
 - Botões não ajustam minuto ou segundo do contador
 - Contagem não funciona 
 - LED não pisca ao final da contagem
-

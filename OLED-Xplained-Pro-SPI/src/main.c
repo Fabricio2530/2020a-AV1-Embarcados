@@ -3,6 +3,9 @@
 #include "gfx_mono_ug_2832hsweg04.h"
 #include "gfx_mono_text.h"
 #include "sysfont.h"
+#include "PIO_FUNCTIONS.h"
+#include "PIO_OLED.h"
+#include "TC-RTT-RTC.h"
 
 int main (void)
 {
@@ -15,7 +18,7 @@ int main (void)
   
   // Escreve na tela um circulo e um texto
 	gfx_mono_draw_filled_circle(20, 16, 16, GFX_PIXEL_SET, GFX_WHOLE);
-  gfx_mono_draw_string("mundo", 50,16, &sysfont);
+	gfx_mono_draw_string("mundo", 50,16, &sysfont);
 
   /* Insert application code here, after the board has been initialized. */
 	while(1) {

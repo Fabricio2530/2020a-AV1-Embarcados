@@ -2,19 +2,6 @@
 volatile double tempo_rtt = 0;
 volatile char flag_rtc_alarm = 0;
 
-typedef struct  {
-	uint32_t year;
-	uint32_t month;
-	uint32_t day;
-	uint32_t week;
-	uint32_t hour;
-	uint32_t minute;
-	uint32_t seccond;
-} calendar;
-
-uint32_t current_hour, current_min, current_sec;
-uint32_t current_year, current_month, current_day, current_week;
-
 
 static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSource) {
 
@@ -44,48 +31,6 @@ static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSou
 	
 }
 
-void RTC_Handler(void) {
-	uint32_t ul_status = rtc_get_status(RTC);
-	
-	/* seccond tick */
-	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {
-		// o código para irq de segundo vem aqui
-	}
-	
-	/* Time or date alarm */
-	if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM) {
-		// o código para irq de alame vem aqui
-		flag_rtc_alarm = 1;
-	}
-
-	rtc_clear_status(RTC, RTC_SCCR_SECCLR);
-	rtc_clear_status(RTC, RTC_SCCR_ALRCLR);
-	rtc_clear_status(RTC, RTC_SCCR_ACKCLR);
-	rtc_clear_status(RTC, RTC_SCCR_TIMCLR);
-	rtc_clear_status(RTC, RTC_SCCR_CALCLR);
-	rtc_clear_status(RTC, RTC_SCCR_TDERRCLR);
-}
-
-void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type) {
-	/* Configura o PMC */
-	pmc_enable_periph_clk(ID_RTC);
-
-	/* Default RTC configuration, 24-hour mode */
-	rtc_set_hour_mode(rtc, 0);
-
-	/* Configura data e hora manualmente */
-	rtc_set_date(rtc, t.year, t.month, t.day, t.week);
-	rtc_set_time(rtc, t.hour, t.minute, t.seccond);
-
-	/* Configure RTC interrupts */
-	NVIC_DisableIRQ(id_rtc);
-	NVIC_ClearPendingIRQ(id_rtc);
-	NVIC_SetPriority(id_rtc, 4);
-	NVIC_EnableIRQ(id_rtc);
-
-	/* Ativa interrupcao via alarme */
-	rtc_enable_interrupt(rtc,  irq_type);
-}
 
 void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 	uint32_t ul_div;

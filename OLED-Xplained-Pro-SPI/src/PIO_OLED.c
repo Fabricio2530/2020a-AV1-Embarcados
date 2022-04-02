@@ -57,15 +57,15 @@ void oled_init(void) {
 	
 	pmc_enable_periph_clk(LED_PI1_ID);
 	//Inicializa LED1 como saída
-	pio_set_output(LED_PI1, LED_PI1_IDX_MASK, 0, 0, 0);
+	pio_set_output(LED_PI1, LED_PI1_IDX_MASK, 1, 0, 0);
 	
 	pmc_enable_periph_clk(LED_PI2_ID);
 	//Inicializa LED2 como saída
-	pio_set_output(LED_PI2, LED_PI2_IDX_MASK, 0, 0, 0);
+	pio_set_output(LED_PI2, LED_PI2_IDX_MASK, 1, 0, 0);
 	
 	pmc_enable_periph_clk(LED_PI1_ID);
 	//Inicializa LED1 como saída
-	pio_set_output(LED_PI3, LED_PI3_IDX_MASK, 0, 0, 0);
+	pio_set_output(LED_PI3, LED_PI3_IDX_MASK, 1, 0, 0);
 	
 	// Inicializa PIO do BOTAO 1
 	pmc_enable_periph_clk(BUT_PI1_ID);
@@ -91,7 +91,7 @@ void oled_init(void) {
 	pio_handler_set(BUT_PI1,
 	BUT_PI1_ID,
 	BUT_PI1_IDX_MASK,
-	PIO_IT_EDGE,
+	PIO_IT_RISE_EDGE,
 	but1_callback);
 	
 	pio_handler_set(BUT_PI2,

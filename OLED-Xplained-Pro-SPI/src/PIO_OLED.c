@@ -40,12 +40,37 @@ volatile char flag_but1 = 0;
 volatile char flag_but2 = 0;
 volatile char flag_but3 = 0;
 
+
+volatile char but_subida_flag = 0;
+volatile char but_descida_flag = 0;
+
+volatile char but_subida_flag_but2 = 0;
+volatile char but_descida_flag_but2 = 0;
+
 void but1_callback(void){
-	flag_but1 = 1;	
+	if (!pio_get(BUT_PI1, PIO_INPUT, BUT_PI1_IDX_MASK)) {
+		but_descida_flag = 1;
+		but_subida_flag = 0;
+		flag_but1 = 1;
+	} else if (pio_get(BUT_PI1, PIO_INPUT, BUT_PI1_IDX_MASK)) {
+		// PINO == 1 --> Borda de subida
+		but_subida_flag = 1;
+		but_descida_flag = 0;
+	}
+	
+	
 }
 
 void but2_callback(void){
-	flag_but2 = 1;
+	if (!pio_get(BUT_PI2, PIO_INPUT, BUT_PI2_IDX_MASK)) {
+			but_descida_flag_but2 = 1;
+			but_subida_flag_but2 = 0;
+			flag_but2 = 1;
+	} else if (pio_get(BUT_PI2, PIO_INPUT, BUT_PI2_IDX_MASK)) {
+			// PINO == 1 --> Borda de subida
+			but_subida_flag_but2 = 1;
+			but_descida_flag_but2 = 0;
+	}
 }
 
 void but3_callback(void) {
@@ -91,13 +116,13 @@ void oled_init(void) {
 	pio_handler_set(BUT_PI1,
 	BUT_PI1_ID,
 	BUT_PI1_IDX_MASK,
-	PIO_IT_RISE_EDGE,
+	PIO_IT_EDGE,
 	but1_callback);
 	
 	pio_handler_set(BUT_PI2,
 	BUT_PI2_ID,
 	BUT_PI2_IDX_MASK,
-	PIO_IT_RISE_EDGE,
+	PIO_IT_EDGE,
 	but2_callback);
 	
 	pio_handler_set(BUT_PI3,

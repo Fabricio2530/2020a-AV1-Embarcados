@@ -13,6 +13,7 @@ volatile char flag_tc_decrementa = 0;
 volatile char start_contagem = 0;
 volatile char led_pisca = 0;
 
+
 char str[300];
 char str2[300];
 
@@ -147,21 +148,53 @@ int main (void)
 		}
 		
 		if (flag_but1 && (start_contagem == 0)) {
-			if (minutos < 59) {
-				minutos += 1;
+			int cont = 0;
+			
+			//APERTO DO BOTAO
+			while(but_descida_flag) {
+				if (cont > 150000000) {
+					if (minutos < 59) {
+						minutos+=1;
+						sprintf(str2, "%d:%d  ",minutos, segundos);
+						gfx_mono_draw_string(str2, 22,15, &sysfont);
+					}
+				}
+				
+				cont++; 
+			}
+			if (but_subida_flag) {
+				if (minutos < 59) {
+					minutos+=1;
+					sprintf(str2, "%d:%d  ",minutos, segundos);
+					gfx_mono_draw_string(str2, 22,15, &sysfont);
+				}
 			}
 			flag_but1 = 0;
-			sprintf(str2, "%d:%d  ",minutos, segundos);
-			gfx_mono_draw_string(str2, 22,15, &sysfont);
 		}
 		
 		if (flag_but2 && (start_contagem == 0)) {
-			if (segundos < 59) {
-				segundos += 1;
+			int cont = 0;
+			
+			//APERTO DO BOTAO
+			while(but_descida_flag_but2) {
+				if (cont > 150000000) {
+					if (segundos < 59) {
+						segundos+=1;
+						sprintf(str2, "%d:%d  ",minutos, segundos);
+						gfx_mono_draw_string(str2, 22,15, &sysfont);
+					}
+				}
+				
+				cont++;
+			}
+			if (but_subida_flag_but2) {
+				if (segundos < 59) {
+					segundos+=1;
+					sprintf(str2, "%d:%d  ",minutos, segundos);
+					gfx_mono_draw_string(str2, 22,15, &sysfont);
+				}
 			}
 			flag_but2 = 0;
-			sprintf(str2, "%d:%d  ",minutos, segundos);
-			gfx_mono_draw_string(str2, 22,15, &sysfont);
 		}
 		
 		if (flag_but3) {
